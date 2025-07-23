@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enroll in Course</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Enroll in Course</h2>
+        
+
+        {% if courses %}
+        
+
+            <ul>
+               
+
+                {% for course in courses %}
+                    <li>
+                        <div class="course-card">
+                            <h3>{{ course['name'] }}</h3>  
+                            <form method="POST">
+                                <input type="hidden" name="course_id" value="{{ course['id'] }}">  <!-- course_id -->
+                                <button type="submit" class="enroll-btn">Enroll</button>
+                            </form>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No courses available</p>
+        {% endif %}
+
+        <a href="{{ url_for('dashboard') }}" class="back-btn">Back to Dashboard</a>
+    </div>
+</body>
+</html>

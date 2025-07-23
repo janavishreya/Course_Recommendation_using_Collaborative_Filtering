@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Recommended Courses for You</h2>
+
+        {% if recommendations %}
+        <ul class="course-list">
+            {% for course in recommendations %}
+                <li onclick="showPopup('{{ course }}')">
+                    {{ course }} 📘
+                </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>No recommendations available at the moment.</p>
+        {% endif %}
+
+        <a href="{{ url_for('dashboard') }}" class="back-btn">Back to Dashboard</a>
+    </div>
+
+    <!-- Pop-up Container -->
+    <div id="popup" class="popup">
+        <h2 id="popup-title"></h2>
+        <p>This course is recommended for you based on your interests.</p>
+        <button onclick="hidePopup()">Close</button>
+    </div>
+
+    <script>
+        function showPopup(courseName) {
+            document.getElementById("popup-title").innerText = courseName;
+            document.getElementById("popup").classList.add("active");
+        }
+
+        function hidePopup() {
+            document.getElementById("popup").classList.remove("active");
+        }
+    </script>
+</body>
+</html>
